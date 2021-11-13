@@ -1,14 +1,17 @@
 {
-  "name": "memeur-solana",
+  "name": "gifshare-solana",
   "version": "0.1.0",
   "author": "dmcclung <dylanmcclung@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "parcel serve --port 3000 src/index.html"
+    "start": "parcel serve --port 3000 src/index.html",
+    "build": "parcel build src/index.html",
+    "heroku-postbuild": "parcel build src/index.html"
   },
   "dependencies": {
     "@project-serum/anchor": "^0.18.0",
     "@solana/web3.js": "^1.30.2",
+    "parcel-bundler": "^1.12.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
