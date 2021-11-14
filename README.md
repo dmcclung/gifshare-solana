@@ -5,7 +5,7 @@ tip contributors with React and Solana.
 
 Features a PDA, program derived address, to store program state.
 
-## Front-end
+## Web3
 ``cd app``
 ``yarn start``
 
