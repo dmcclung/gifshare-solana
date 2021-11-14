@@ -144,6 +144,27 @@ const App = () => {
     }
   }
 
+  const tip = (publicKey) => {
+    const provider = getProvider()
+    const transaction = new web3.Transaction().add(
+      SystemProgram.transfer({
+        fromPubkey: provider.wallet.publicKey,
+        toPubkey: publicKey,
+        lamports: 100,
+    }))
+
+    transaction.feePayer = provider.wallet.publicKey
+    
+    connection.getRecentBlockhash().then(({blockhash}) => {
+      transaction.recentBlockhash = blockhash
+      provider.wallet.signTransaction(transaction).then(transaction => {
+        web3.sendAndConfirmRawTransaction(connection, transaction.serialize())
+      })
+    })
+
+    return false
+  }
+
   return (
     <div className="App">
       <div className={walletAddress ? 'authed-container' : 'container'}>
@@ -169,6 +190,11 @@ const App = () => {
                 {gifList.map((gif, index) => (
                   <div className="gif-item" key={index}>
                     <img src={gif.gifLink} alt={gif.gifLink} />
+                    <a
+                      href="#"
+                      className="footer-text"
+                      onClick={() => tip(gif.userAddress)}
+                    >{gif.userAddress.toString()}</a>
                   </div>
                 ))}
               </div>
