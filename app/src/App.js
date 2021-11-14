@@ -135,6 +135,7 @@ const App = () => {
       await program.rpc.addGif(inputValue, {
         accounts: {
           baseAccount: baseAccountPublicKey,
+          user: provider.wallet.publicKey,
         }
       })
       getGifList()
